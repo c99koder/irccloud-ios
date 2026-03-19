@@ -254,8 +254,10 @@
 -(NSString *)reply {
     if([[self->_entities objectForKey:@"reply"] isKindOfClass:NSString.class])
         return [self->_entities objectForKey:@"reply"];
-    else
+    else if([[[self->_entities objectForKey:@"known_client_tags"] objectForKey:@"reply"] isKindOfClass:NSString.class])
         return [[self->_entities objectForKey:@"known_client_tags"] objectForKey:@"reply"];
+    else
+        return nil;
 }
 
 -(NSURL *)avatar:(int)size {
