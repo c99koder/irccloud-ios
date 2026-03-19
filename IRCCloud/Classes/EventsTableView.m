@@ -2925,9 +2925,9 @@ extern UIImage *__socketClosedBackgroundImage;
     }
     
     if(!__replyCollapsePref) {
-        if(e.isReply || e.replyCount) {
+        if((e.isReply && [e.reply isKindOfClass:NSString.class]) || e.replyCount) {
             cell.reply.font = [ColorFormatter replyThreadFont];
-            cell.reply.textColor = [UIColor colorFromHexString:[UIColor colorForNick:e.isReply ? e.reply : e.msgid]];
+            cell.reply.textColor = [UIColor colorFromHexString:[UIColor colorForNick:(e.isReply && [e.reply isKindOfClass:NSString.class]) ? e.reply : e.msgid]];
             cell.reply.text = e.isReply ? FA_COMMENTS : FA_COMMENT;
             cell.reply.hidden = NO;
             cell.replyButton.hidden = NO;
