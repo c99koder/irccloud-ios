@@ -252,7 +252,7 @@
 }
 
 -(NSString *)reply {
-    if([self->_entities objectForKey:@"reply"])
+    if([[self->_entities objectForKey:@"reply"] isKindOfClass:NSString.class])
         return [self->_entities objectForKey:@"reply"];
     else
         return [[self->_entities objectForKey:@"known_client_tags"] objectForKey:@"reply"];
