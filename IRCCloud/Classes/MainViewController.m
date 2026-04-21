@@ -5466,8 +5466,13 @@ NSArray *_sortedChannels;
             BOOL shouldMoveCursor = self->_message.selectedRange.location == 0 || self->_message.selectedRange.location == msg.length;
             if(self->_message.selectedRange.length > 0)
                 [msg deleteCharactersInRange:self->_message.selectedRange];
+
+            NSDictionary *attributes = @{};
             
-            [msg insertAttributedString:[[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName:self->_message.font,NSForegroundColorAttributeName:self->_message.textColor}] atIndex:self->_message.selectedRange.location];
+            if (self->_message.font && self->_message.textColor) {
+                attributes = @{NSFontAttributeName:self->_message.font,NSForegroundColorAttributeName:self->_message.textColor};
+            }
+            [msg insertAttributedString:[[NSAttributedString alloc] initWithString:text attributes:attributes] atIndex:self->_message.selectedRange.location];
             
             [self->_message setAttributedText:msg];
             if(shouldMoveCursor)
